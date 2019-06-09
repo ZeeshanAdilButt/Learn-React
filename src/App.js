@@ -8,6 +8,16 @@ import Counters from "./components/counters";
 import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+    console.log("App - constructor");
+  }
+
+  componentDidMount() {
+    // we can make ajax calls here
+    console.log("App mounted");
+  }
+
   state = {
     counters: [
       { id: 1, value: 0 },
@@ -16,6 +26,27 @@ class App extends Component {
       { id: 4, value: 4 }
     ]
   };
+
+  render() {
+    console.log("render called");
+
+    return (
+      <React.Fragment>
+        <NavBar
+          totalCounters={this.state.counters.filter(c => c.value > 0).length}
+        />
+
+        <main className="container">
+          <Counters
+            counters={this.state.counters}
+            onReset={this.handleReset}
+            onIncrement={this.handleIncrement}
+            onDelete={this.handleDelete}
+          />
+        </main>
+      </React.Fragment>
+    );
+  }
 
   handleIncrement = counter => {
     const counters = [...this.state.counters];
@@ -39,25 +70,6 @@ class App extends Component {
     const counters = this.state.counters.filter(c => c.id !== counterId);
     this.setState({ counters: counters });
   };
-
-  render() {
-    return (
-      <React.Fragment>
-        <NavBar
-          totalCounters={this.state.counters.filter(c => c.value > 0).length}
-        />
-
-        <main className="container">
-          <Counters
-            counters={this.state.counters}
-            onReset={this.handleReset}
-            onIncrement={this.handleIncrement}
-            onDelete={this.handleDelete}
-          />
-        </main>
-      </React.Fragment>
-    );
-  }
 }
 
 export default App;

@@ -25,6 +25,18 @@ class Counter extends Component {
   //   this.setState({ value: this.state.value + 1 });
   // };
 
+  //if the component is updated
+  componentDidUpdate(prevProps, prevState) {
+    console.log("prevProps", prevProps);
+    console.log("prevState", prevState);
+  }
+
+  //if component is unmounted
+  // can be used to check unmounting of component and hence help in cleanup
+  componentWillUnmount() {
+    console.log("componet unmounted");
+  }
+
   render() {
     // console.log("props", this.props);
     // console.log("props id ", this.props.id);
