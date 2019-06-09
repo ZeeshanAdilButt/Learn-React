@@ -3,7 +3,7 @@ import { render } from "react-dom";
 
 class Counter extends Component {
   state = {
-    value: this.props.value,
+    value: this.props.counter.value,
     imageUrl: "https://picsum.photos/200",
     tags: ["tag 1", "tag 2", "tag 3"],
     testArray: []
@@ -25,12 +25,14 @@ class Counter extends Component {
   };
 
   render() {
-    console.log("props", this.props);
+    // console.log("props", this.props);
+    // console.log("props id ", this.props.id);
 
     return (
       <React.Fragment>
         {/* <img src={this.state.imageUrl} alt="" /> */}
         {this.props.children}
+
         <span style={{ fontSize: 13 }} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
@@ -40,6 +42,13 @@ class Counter extends Component {
           className="btn btn-sm btn-secondary"
         >
           Increment
+        </button>
+
+        <button
+          onClick={() => this.props.onDelete(this.props.counter.id)}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
         </button>
 
         <br />
